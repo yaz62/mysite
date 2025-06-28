@@ -1,0 +1,20 @@
+baseURL = "https://yaz62.github.io/"
+languageCode = "en-us"
+title = "Yan Zhang"
+theme = "hugo-coder"
+enableGitInfo = true
+
+[params]
+author = "Yan Zhang"
+info = "Bits of Science, Math, and Code, In That Order"
+description = "Personal blogs on science, math, and coding"
+avatarURL = ""  # You can set a URL later
+math = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
