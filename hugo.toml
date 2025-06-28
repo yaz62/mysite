@@ -18,3 +18,8 @@ math = true
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+
+[[menu.main]]
+  name = "Blog"
+  url = "/posts/"
+  weight = 1
