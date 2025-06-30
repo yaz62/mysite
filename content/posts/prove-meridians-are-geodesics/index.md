@@ -74,10 +74,22 @@ $$
     \sqrt{f^{\prime\prime 2}\cos^2 v_0 + f^{\prime\prime 2}\sin^2 v_0 + g^{\prime\prime 2}} = 
     \sqrt{f^{\prime\prime 2} + g^{\prime\prime 2}}\\\\\[1.5ex]
     \mathrm D_{\alpha^\prime(u)} \alpha^\prime(u)\cdot n &= 
-    \frac{-f^{\prime\prime}g^\prime\cos^2 v - f^{\prime\prime}g^\prime\sin^2 v + f^\prime g^{\prime\prime}}{\sqrt{g^{\prime 2} + f^{\prime 2}}} \\\\\[1.5ex]
-    &= \frac{f^\prime g^{\prime\prime} - f^{\prime\prime}g^\prime}{\sqrt{g^{\prime 2} + f^{\prime 2}}}
+    \frac{-f^{\prime\prime}g^\prime\cos^2 v - f^{\prime\prime}g^\prime\sin^2 v + f^\prime g^{\prime\prime}}{\sqrt{g^{\prime 2} + f^{\prime 2}}} = \frac{f^\prime g^{\prime\prime} - f^{\prime\prime}g^\prime}{\sqrt{g^{\prime 2} + f^{\prime 2}}}
 \end{align\*}
 $$
+Now I'm in trouble because clearly they are not always equal! Meridians should *always* be geodesics, but now the calculations 
+say that $f(u)$ and $g(u)$ need to satisfy some condition for this to be the case. Naturally, I turn to ChatGPT for answers. First, 
+under my guidance, ChatGPT 4o verified my calculations and the issue:
 
-Also, the principal normal vector of the curve is always parallel to the surface normal vector in my mental picture 
-of the meridian, which we can check easily.
+![My plot](gpt1.png)
+
+To resolve the apparent paradox, ChatGPT says:
+
+![My plot](gpt2.png)
+
+ChatGPT actually made a valid point on the arclength parametrization, which I will address later, 
+but the three bullet points are utterly confusing to me. You can't say that "$\alpha^{\prime\prime}(u)$ always equals its normal component only when the meridian is a geodesic", because (1) the claim is that meridians are *always* geodesics, and (2) we are trying to prove the claim by showing that $\alpha^{\prime\prime}$ always equals its normal component. I pointed out the confusing logic, but ChatGPT seems to be stuck in some loop, giving more and more confusing reasons, like such:
+
+![My plot](gpt3.png)
+
+There's simply no way that $\alpha^{\prime\prime}$ lives in the 1D normal space and doesn't align with the unit surface normal. For some reason I didn't think of ChatGPT o4-mini, which is much better at reasoning, but instead I turned to Claude Sonnet 4, since many people have said good things about it. 
