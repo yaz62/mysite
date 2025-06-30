@@ -92,4 +92,20 @@ but the three bullet points are utterly confusing to me. You can't say that "$\a
 
 ![My plot](gpt3.png)
 
-There's simply no way that $\alpha^{\prime\prime}$ lives in the 1D normal space and doesn't align with the unit surface normal. For some reason I didn't think of ChatGPT o4-mini, which is much better at reasoning, but instead I turned to Claude Sonnet 4, since many people have said good things about it. 
+There's simply no way that $\alpha^{\prime\prime}$ lives in the 1D normal space and doesn't align with the unit surface normal. For some reason I didn't think of ChatGPT o4-mini, which is much better at reasoning, but instead I turned to Claude Sonnet 4, since many people have said good things about it. At first, Sonnet 4 tried to show that the covariant derivative is zero:
+
+![My plot](claude1.png)
+
+So it seemed to be using the same circular logic that ChatGPT used, that "the covariant derivative is zero because it should be zero for geodesics", which totally defeats the purpose of the proof. Here's how the conversation unfolds after I pointed out the obviously flawed reasoning:
+
+![My plot](claude2.png)
+![My plot](claude3.png)
+![My plot](claude4.png)
+![My plot](claude5.png)
+![My plot](claude6.png)
+
+In short, Sonnet 4 realized that there's inconsistency somewhere along the line, and it admits that it doesn't know exactly what it is. Personally, I found this conversation more pleasant than the one I had with ChatGPT 4o, but this is a topic for later. The turning point happened in the next exchange:
+
+![My plot](claude7.png)
+![My plot](claude8.png)
+
