@@ -116,13 +116,13 @@ ChatGPT actually made a valid point about arclength parametrization, which I wil
 
 ![My plot](gpt3.png)
 
-There's simply no way that $\alpha^{\prime\prime}$ lives in the 1D normal space and doesn't align with the unit surface normal. For some reason, I didn't think of ChatGPT o4-mini, which is much better at reasoning, but instead I turned to Claude Sonnet 4, since many people have said good things about it. At first, Claude tried to show that the covariant derivative is zero:
+There's simply no way that $\alpha^{\prime\prime}$ doesn't align with the unit surface normal, because the normal space is 1D! For some reason, I didn't think of ChatGPT o4-mini, which is much better at reasoning, but instead I turned to Claude Sonnet 4, since many people have said good things about it. Here's the conclusion Claude arrived at initially:
 
 <p style="text-align: center;">
     <img src="claude1.png" alt="Diagram" style="width:80%;" />
 </p>
 
-So it seemed to be using the same circular logic that ChatGPT used, that "the covariant derivative is zero because it should be zero for geodesics," which totally defeats the purpose of the proof. Here's how the conversation unfolded after I pointed out the obviously flawed reasoning:
+It seemed to be using the same circular logic that ChatGPT used, that "the covariant derivative is zero because it should be zero for geodesics," which totally defeats the purpose of the proof. Here's how the conversation unfolded after I pointed out the obviously flawed reasoning:
 
 <p style="text-align: center;">
     <img src="claude2.png" alt="Diagram" style="width:80%;" />
@@ -161,7 +161,7 @@ Since it seemed like Claude became confused again, I thought of ChatGPT o4-mini,
     <img src="gpt4.png" alt="Diagram" style="width:80%;" />
 </p>
 
-Now it started to make sense to me: parametrization not only controls the shape of the curve, but also how an object moves along the curve. The directional derivative of the tangent vector is the acceleration, so even along a geodesic it can have a tangential component if the object is accelerating! Furthermore, since parallel transport, defined by a vanished covariant derivative, is *length preserving*, the length of the tangent vector has to remain constant, which is exactly the condition Claude got from solving $\nabla_{\alpha^\prime}\alpha^\prime=0$. So, the **definition** is somewhat misleading, in that the tangent vector is not just *parallel* along the curve, but it's *parallel-transported*. Embarrassingly, after reading the notes a bit more carefully, I found the following text underneath the definition, only half a centimeter away:
+Now it started to make sense to me: parametrization not only controls the shape of the curve, but also how an object moves along the curve. The directional derivative of the tangent vector is the acceleration, so even along a geodesic it can have a tangential component if the object is accelerating! Furthermore, since parallel transport, defined by a vanished covariant derivative, is *length preserving*, the length of the transported tangent vector of the meridian has to remain constant, which is exactly the condition Claude got from solving $\nabla_{\alpha^\prime}\alpha^\prime=0$. So, the **definition** is somewhat misleading, in that the tangent vector of the meridian is not just *parallel* along the curve, but it's *parallel-transported*. Embarrassingly, after reading the notes a bit more carefully, I found the following text underneath the definition, only half a centimeter away:
 
 > Recall that since parallel translation preserves lengths, $\alpha$ must have constant speed, although it may not be arclength-parametrized. In general, we refer to an unparametrized curve as a geodesic if its arclength parametrization is in fact a geodesic.
 
@@ -173,4 +173,4 @@ I explained what I "discovered" to Claude, and it nicely summarized everything:
 
 It is amazing to me how working out a simple proof led to a journey of discovering a missing part in my knowledge, which in the end also deepened my understanding of the relationship between geodesics and parallel transport. The fact that the constant speed condition emerges naturally from the parallel transport requirement really ties everything together elegantly. 
 
-What's more amazing to me is the role of LLMs. ChatGPT 4o did mention arclength parametrization at first, but it didn't show this was the key to the puzzle, and instead gave me some hand-waving explanations. Claude failed to provide the answer too, and got the same confusion as I did, but still played the role of a "math buddy" exploring the problem with me. It noticed the algebraic connection of the equation to constant speed, which eventually became our "eureka!" moment. This experience of collaborative exploration brought more dopamine than the answer itself. Of course, if I had used ChatGPT o4-mini in the first place, I might have saved a few hours, but I think it would have been way less fun.
+What's more amazing to me is the role of LLMs. ChatGPT 4o did mention arclength parametrization at first, but it didn't show this was the key to the puzzle, and instead gave me some hand-waving explanations. Claude failed to provide the answer too, and got the same confusion as I did, but still played the role of a "math buddy" exploring the problem with me. It noticed the algebraic connection of the equation to constant speed, which eventually became our "eureka!" moment. This experience of collaborative exploration brought more satisfaction than the answer itself. Of course, if I had used ChatGPT o4-mini in the first place, I might have saved a few hours, but I think it would have been way less fun.
