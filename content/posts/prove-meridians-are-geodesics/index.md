@@ -12,16 +12,11 @@ tags = ["differential geometry", "meridian", "geodesic", "covariant parallel", "
 - Parallel transport preserves the length of the tangent vector, so the tangent must have constant speed along a geodesic.
 - The experience highlighted the importance of understanding the role of parametrization in the definition of geodesics.
 
-I've learned bits of differential geometry over the years, and I always use Theodore Shifrin's notes, 
-*Differential Geometry: A First Course in Curves and Surfaces*, as my textbook. Recently, I decided to
-pick it back up just for fun. 
+I've learned bits of differential geometry over the years, and I always use Theodore Shifrin's notes, *Differential Geometry: A First Course in Curves and Surfaces*, as my textbook. Recently, I decided to pick it back up just for fun. 
 
-In Chapter 2, after reading about Clairaut's relation and trying to get an intuitive picture of it, it occurred 
-to me that the meridians of a surface of revolution should always be geodesics. This makes sense because the "terrain" 
-is symmetrical about the meridian, so if you are walking along the meridian, you are not going either left or right but straight. 
-But to show this formally, we need to use the mathematical definition of a geodesic, and I'll use the one from the notes:
+In Chapter 2, after reading about Clairaut's relation and trying to get an intuitive picture of it, it occurred to me that the meridians of a surface of revolution should always be geodesics. This makes sense because the "terrain" is symmetrical about the meridian, so if you are walking along the meridian, you are not going either left or right but straight. But to show this formally, we need to use the mathematical definition of a geodesic, and I'll use the one from the notes:
 
-> **Definition.** We say a parametrized curve $\alpha$ in a surface M is a geodesic if its tangent vector is parallel along the curve, 
+> **Definition.** We say a parametrized curve $\alpha$ in a surface $M$ is a geodesic if its tangent vector is parallel along the curve, 
 i.e., if $\nabla_{\alpha^\prime}\alpha^\prime=0$.
 
 To add some brief explanation: $\nabla$ is the covariant derivative, defined as the projection of the directional derivative onto the tangent space:
@@ -51,8 +46,13 @@ So, the first step is parametrize an arbitrary surface of revolution as:
 $$
     x(u, v) = \big(f(u)\cos v, f(u)\sin v, g(u)\big)
 $$
-where $f$ and $g$ are two arbitrary functions describing the curve that generates the surface by revolution. Then, 
-a meridian is simply a $u$-curve, namely, a curve that's parametrized only by $u$, at a constant $v=v_0$:
+where $f$ and $g$ are two arbitrary functions describing the curve $\beta$ that generates the surface by revolution, and $v$ the angle of rotation:
+
+<p style="text-align: center;">
+    <img src="diagram_param.png" alt="Diagram" style="width:40%;" />
+</p>
+
+Then, a meridian $\alpha$ is simply a $u$-curve, namely, a curve that's parametrized only by $u$, at a constant $v=v_0$:
 $$
     \alpha(u) = \big(f(u)\cos v_0, f(u)\sin v_0, g(u)\big)
 $$
@@ -111,8 +111,7 @@ To resolve the apparent paradox, ChatGPT says:
 
 ![My plot](gpt2.png)
 
-ChatGPT actually made a valid point on the arclength parametrization, which I will address later, 
-but the three bullet points are utterly confusing to me. You can't say that "$\alpha^{\prime\prime}(u)$ always equals its normal component only when the meridian is a geodesic", because (1) the claim is that meridians are *always* geodesics, and (2) we are trying to prove the claim by showing that $\alpha^{\prime\prime}$ always equals its normal component. I pointed out the confusing logic, but ChatGPT seems to be stuck in some loop, giving more and more confusing reasons, like such:
+ChatGPT actually made a valid point on the arclength parametrization, which I will address later, but the three bullet points are utterly confusing to me. You can't say that "$\alpha^{\prime\prime}(u)$ always equals its normal component only when the meridian is a geodesic", because (1) the claim is that meridians are *always* geodesics, and (2) we are trying to prove the claim by showing that $\alpha^{\prime\prime}$ always equals its normal component. I pointed out the confusing logic, but ChatGPT seems to be stuck in some loop, giving more and more confusing reasons, like such:
 
 ![My plot](gpt3.png)
 
@@ -139,7 +138,6 @@ So it seemed to be using the same circular logic that ChatGPT used, that "the co
 <p style="text-align: center;">
     <img src="claude6.png" alt="Diagram" style="width:80%;" />
 </p>
-
 
 In short, Claude realized that there's inconsistency somewhere along the line, and it admitted that it didn't know exactly what it is. Personally, I found this conversation more pleasant than the one I had with ChatGPT 4o, but this is a topic for later. The turning point happened in the next exchange:
 
