@@ -38,7 +38,7 @@ Then the recipe for the proof is quite straightforward:
 - Calculate the covariant derivative $\nabla_{\alpha^\prime}\alpha^\prime$ by projecting $D_{\alpha^\prime}\alpha^\prime$ onto the tangent plane.
 - Show that $\nabla_{\alpha^\prime}\alpha^\prime$ is always 0.
 
-The second-to-last step may sound simple, but it usually involves Christoffel symbols, which can be quite a hassle. Instead, I decided to change the last two steps a bit to make the calculations easier:
+The second-to-last step may sound simple, but it usually involves Christoffel symbols, which can be quite a hassle. Instead, I decided to adopt a different but equivalent approach to make the calculations easier:
 - Calculate the unit surface normal from $x_u$ and $x_v$.
 - Calculate the normal component of $D_{\alpha^\prime}\alpha^\prime$.
 - Show that the length of the normal component equals $\lVert D_{\alpha^\prime}\alpha^\prime \rVert$.
