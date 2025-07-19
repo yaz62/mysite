@@ -40,7 +40,17 @@ $$
     x^\prime(u, v, u^\prime, v^\prime) = \frac{\mathrm d}{\mathrm dt}x(u, v) = u^\prime x_u + v^\prime x_v
 $$
 
-So, later when I introduce variations to the curve, this will not only result in the coordinates $[u(t), v(t)]$ of the curve, but also the tangent $[u^\prime(t), v^\prime(t)]$. Now if there's a small variation $\delta \alpha$ applied to the curve, the energy functional is perturbed:
+So, when a small variation is introduced to the curve, this will not only result in the coordinates $[u(t), v(t)]$ of the curve, but also the tangent $[u^\prime(t), v^\prime(t)]$. The shortcut to solve the optimization of $E$ is to use the Euler-Lagrange equation:
+$$
+\begin{align\*}
+\begin{cases}
+  \displaystyle\ \frac{\partial E}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial u^\prime} = 0 \\\\\[3ex]
+  \displaystyle\ \frac{\partial E}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial v^\prime} = 0
+\end{cases}
+\end{align\*}
+$$
+
+Now if there's a small variation $\delta \alpha$ applied to the curve, the energy functional is perturbed:
 $$
 \begin{align\*}
     E + \delta E &= \frac{1}{2}\int_0^T (x^\prime+\delta x^\prime) \cdot (x^\prime+\delta x^\prime) \mathrm dt \\\\\[1.5ex]
@@ -126,8 +136,36 @@ $$
 \begin{align\*}
     \delta E &= -\int_0^T \mathrm dt\ \big(u^{\prime\prime} E + v^{\prime\prime} F + u^{\prime 2}x_u\cdot x_{uu} + 2u^\prime v^\prime x_u\cdot x_{uv} + v^{\prime 2} x_u\cdot x_{vv}\big)\delta u  \\\\\[1.5ex]
     &\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \big(u^{\prime\prime} F + v^{\prime\prime} G + u^{\prime 2}x_v\cdot x_{uu} + 2u^\prime v^\prime x_v \cdot x_{uv} + v^{\prime 2}x_v\cdot x_{vv}\big)\delta v  \\\\\[1.5ex]
-    &= -\int_0^T \mathrm dt\ \big(u^{\prime\prime} E + v^{\prime\prime} F + x_u \cdot (u^{\prime 2}x_{uu} + 2u^\prime v^\prime x_{uv} + v^{\prime 2} x_{vv})\big)\delta u  \\\\\[1.5ex]
-    &\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \big(u^{\prime\prime} F + v^{\prime\prime} G + x_v \cdot (u^{\prime 2}x_{uu} + 2u^\prime v^\prime x_{uv} + v^{\prime 2}x_{vv})\big)\delta v  \\\\\[1.5ex]
+    &= -\int_0^T \mathrm dt\ (u^{\prime\prime} x_u + v^{\prime\prime} x_v + u^{\prime 2}x_{uu} + 2u^\prime v^\prime x_{uv} + v^{\prime 2} x_{vv}) \cdot x_u \ \delta u  \\\\\[1.5ex]
+    &\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + (u^{\prime\prime} x_u + v^{\prime\prime} x_v + u^{\prime 2}x_{uu} + 2u^\prime v^\prime x_{uv} + v^{\prime 2}x_{vv})\cdot x_v\ \delta v  \\\\\[1.5ex]
 \end{align\*}
 $$
 
+To further simplify the expression, note that:
+$$
+\begin{align\*}
+    & u^{\prime\prime} x_u + v^{\prime\prime} x_v + u^{\prime 2}x_{uu} + 2u^\prime v^\prime x_{uv} + v^{\prime 2}x_{vv}  \\\\\[1.5ex]
+    =\ & u^{\prime\prime} x_u + v^{\prime\prime} x_v + u^\prime \big(u^\prime x_{uu} + v^\prime x_{uv}\big) + v^\prime\big(u^\prime x_{uv} + v^\prime x_{vv}\big)  \\\\\[1.5ex]
+    =\ & u^{\prime\prime} x_u + v^{\prime\prime} x_v + u^\prime x_u^\prime + v^\prime x_v^\prime \\\\\[1.5ex]
+    =\ & (u^\prime x_u + v^\prime x_v)^\prime \\\\\[1.5ex]
+    =\ & x^{\prime\prime}
+\end{align\*}
+$$
+
+So,
+$$
+    \delta E = -\int_0^T\ (x^{\prime\prime}\cdot x_u\delta u +  x^{\prime\prime}\cdot x_v\delta v)\ \mathrm dt
+$$
+
+As in any optimization problem, the minimum of $E$ is found when the variation $\delta E=0$. This leads to the following equations:
+$$
+\begin{cases}
+  \ x^{\prime\prime}\cdot x_u = 0 \\\\
+  \ x^{\prime\prime}\cdot x_v = 0
+\end{cases}
+$$
+
+Since $x_u$ and $x_v$ are the two (not necessarily orthogonal) basis vectors of the tangent plane, the above equations suggest that:
+$$
+    \big(x^{\prime\prime}\big)^\parallel = \big(D_{\alpha^\prime}\alpha^\prime\big)^\parallel = \nabla_{\alpha^\prime}\alpha^\prime=0
+$$
