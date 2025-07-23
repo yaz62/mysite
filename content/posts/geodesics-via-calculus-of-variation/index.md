@@ -40,13 +40,52 @@ $$
     x^\prime(u, v, u^\prime, v^\prime) = \frac{\mathrm d}{\mathrm dt}x(u, v) = u^\prime x_u + v^\prime x_v
 $$
 
-So, when a small variation is introduced to the curve, this will not only result in the coordinates $[u(t), v(t)]$ of the curve, but also the tangent $[u^\prime(t), v^\prime(t)]$. The shortcut to solve the optimization of $E$ is to use the Euler-Lagrange equation:
+So, when a small variation is introduced to the curve, this will not only result in the coordinates $[u(t), v(t)]$ of the curve, but also the tangent $[u^\prime(t), v^\prime(t)]$. Here are partial derivatives of $x^\prime$ that will be useful later:
+$$
+\begin{align\*}
+\begin{cases}
+    \displaystyle\ \frac{\partial x^\prime}{\partial u} = x_u^\prime = u^\prime x_{uu} + v^\prime x_{uv} \\\\\[3ex]
+    \displaystyle\ \frac{\partial x^\prime}{\partial v} = x_v^\prime = u^\prime x_{uv} + v^\prime x_{vv} \\\\\[3ex]
+    \displaystyle\ \frac{\partial x^\prime}{\partial u^\prime} = x_u \\\\\[3ex]
+    \displaystyle\ \frac{\partial x^\prime}{\partial v^\prime} = x_v
+\end{cases}
+\end{align\*}
+$$
+The shortcut to solve the optimization of $E$ is to use the Euler-Lagrange equation:
 $$
 \begin{align\*}
 \begin{cases}
   \displaystyle\ \frac{\partial E}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial u^\prime} = 0 \\\\\[3ex]
   \displaystyle\ \frac{\partial E}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial v^\prime} = 0
 \end{cases}
+\end{align\*}
+$$
+
+Calculate each term:
+$$
+\begin{align\*}
+    \frac{\partial E}{\partial u} &= \int_0^T x^\prime\cdot x_u^\prime \mathrm dt \\\\\[3ex]
+    \frac{\partial E}{\partial v} &= \int_0^T x^\prime\cdot x_v^\prime \mathrm dt \\\\\[3ex]
+    \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial u^\prime} &= \frac{\mathrm d}{\mathrm dt}\int_0^T x^\prime\cdot \frac{\partial x^\prime}{\partial u^\prime} \mathrm dt \\\\\[1.5ex]
+    &= \int_0^T \Big(x^{\prime\prime}\cdot \frac{\partial x^\prime}{\partial u^\prime} + x^{\prime}\cdot \frac{\mathrm d}{\mathrm dt}\frac{\partial x^\prime}{\partial u^\prime} \Big) \mathrm dt \\\\\[1.5ex]
+    &= \int_0^T \Big(x^{\prime\prime}\cdot x_u + x^{\prime}\cdot x_u^\prime \Big) \mathrm dt \\\\\[3ex]
+    \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial v^\prime} &= \int_0^T \Big(x^{\prime\prime}\cdot x_v + x^{\prime}\cdot x_v^\prime \Big) \mathrm dt
+\end{align\*}
+$$
+Combine together:
+$$
+\begin{align\*}
+&\begin{cases}
+  \displaystyle\ \int_0^T \Big(\textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_u^\prime}}} - x^{\prime\prime}\cdot x_u - \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_u^\prime}}}\Big) \mathrm dt = 0 \\\\\[3ex]
+  \displaystyle\ \int_0^T \Big(\textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_v^\prime}}} - x^{\prime\prime}\cdot x_v - \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_v^\prime}}}\Big) \mathrm dt = 0\\\\\[3ex]
+\end{cases} \\\\\[3ex]
+\Rightarrow &
+\begin{cases}
+  x^{\prime\prime}\cdot x_u = 0 \\\\\[1.5ex]
+  x^{\prime\prime}\cdot x_v = 0
+\end{cases}  \\\\\[3ex]
+\Rightarrow &\Big(D_{\alpha^\prime}\alpha^\prime\Big)^\parallel = 0 
+\Rightarrow \nabla_{\alpha^\prime}\alpha^\prime = 0
 \end{align\*}
 $$
 
