@@ -51,7 +51,7 @@ $$
 \end{cases}
 \end{align\*}
 $$
-The shortcut to solve the optimization of $E$ is to use the Euler-Lagrange equation:
+The shortcut to solve the optimization of $E$ is to use the Euler-Lagrange equation, which gives us the solution when $\alpha$ minimizes $E$:
 $$
 \begin{align\*}
 \begin{cases}
@@ -84,11 +84,38 @@ $$
   x^{\prime\prime}\cdot x_u = 0 \\\\\[1.5ex]
   x^{\prime\prime}\cdot x_v = 0
 \end{cases}  \\\\\[3ex]
-\Rightarrow &\Big(D_{\alpha^\prime}\alpha^\prime\Big)^\parallel = 0 
-\Rightarrow \nabla_{\alpha^\prime}\alpha^\prime = 0
+\Rightarrow &\Big(D_{\alpha^\prime}\alpha^\prime\Big)^\parallel = 0 \\\\\[1.5ex]
+\Rightarrow &\nabla_{\alpha^\prime}\alpha^\prime = 0
+\end{align\*}
+$$
+There it is: the definition that the geodesic is straight -- the tangent vector doesn't change along the curve, i.e. $\nabla_{\alpha^\prime}\alpha^\prime = 0$ -- is indeed mathematically equivalent to the notion that geodesics minimize distances on surfaces. To see the math orgies when we don't use the Euler-Lagrange equation, check out the *PS* at the end. The requirement of affine (namely constant speed) parametrization is implied already, because otherwise there will be tangential acceleration and the covariant derivative won't be zero. It comes out naturally as we vary not only the shape of the curve ($u$ and $v$), but also how fast a particle travels along the curve ($u^\prime$ and $v^\prime$). Furthermore, the dependence of the energy functional on speed can be explicitly shown like this: let $s$ be the arclength parameter,
+$$
+\begin{align\*}
+    E\[\alpha\] &= \frac{1}{2}\int_0^T \alpha^\prime \cdot \alpha^\prime \mathrm dt \\\\\[1.5ex]
+    &= \frac{1}{2}\int_0^T \Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big) \mathrm dt \\\\\[1.5ex]
+    &= \frac{1}{2}\int_0^T s^\prime\Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big) \mathrm ds \\\\\[1.5ex]
+\end{align\*}
+$$
+So when varying the energy functional, the speed $s^\prime$ is also perturbed. Now the question is, what if I used the length functional instead, which is parametrization invariant? Explicitly, 
+$$
+\begin{align\*}
+    S\[\alpha\] &= \int_0^T \lVert\alpha^\prime\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime \cdot \alpha^\prime} \mathrm dt \\\\\[1.5ex]
+    &= \int_0^T \sqrt{\Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big)} \mathrm dt \\\\\[1.5ex]
+    &= \int_0^T \sqrt{\Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big)} \mathrm ds \\\\\[1.5ex]
+\end{align\*}
+$$
+which means that the length functional doesn't depend on speed (of course length is not a function of speed, duh)! Will we still recover $\nabla_{\alpha^\prime}\alpha^\prime = 0$ which requires constant speed if we use the length functional? Let's find out:
+$$
+\begin{align\*}
+    S\[\alpha\] &= \int_0^T \lVert\alpha^\prime\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime(t) \cdot \alpha^\prime(t)} \mathrm dt \\\\\[1.5ex]
+    &= \int_0^T \sqrt{x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big)} \mathrm dt
 \end{align\*}
 $$
 
+Calculate each term in the Euler-Lagrange equation:
+
+
+### P.S. The Promised Math Orgy
 Now if there's a small variation $\delta \alpha$ applied to the curve, the energy functional is perturbed:
 $$
 \begin{align\*}

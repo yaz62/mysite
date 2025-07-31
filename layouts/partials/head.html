@@ -1,0 +1,43 @@
+{{ partial "head/meta-tags.html" . }}
+
+{{ if .Params.canonicalUrl }}
+<link rel="canonical" href="{{ .Params.canonicalUrl }}">
+{{ else }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
+
+{{ partialCached "head/theme-styles.html" . }}
+
+{{ partialCached "head/color-scheme.html" . }}
+
+{{ partialCached "head/custom-styles.html" . }}
+
+{{ partialCached "head/custom-icons.html" . }}
+
+{{ partial "head/alternative-output-formats.html" . }}
+
+{{ if .IsHome }}{{ partial "head/hugo-generator.html" . }}{{ end }}
+
+{{ partial "head/extensions.html" . }}
+
+{{ partial "math.html" . }}
+
+<!-- MathJax custom macro config -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      macros: {
+        dfrac: ["\\frac{\\mathrm d #1}{\\mathrm d #2}", 2],
+        pfrac: ["\\frac{\\partial #1}{\\partial #2}", 2],
+        ddf: ["\\frac{\\mathrm d^2 #1}{\\mathrm d #2^2}", 2], 
+        blue: ["\\textcolor{blue}{#1}", 1],
+        red: ["\\textcolor{red}{#1}", 1],
+      }
+    }
+  };
+</script>
+
+<!-- Load MathJax (after config!) -->
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
