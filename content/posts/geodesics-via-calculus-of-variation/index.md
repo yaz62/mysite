@@ -13,12 +13,12 @@ The **definition** I used in [this post](https://yaz62.github.io/posts/prove-mer
 
 Consider two points $P$ and $Q$ on a curved space $x$, connected by a curve $\alpha$. A particle moves from $P$ to $Q$ at speed $\lVert\alpha^\prime\rVert$, taking time $T$. The distance functional is defined as the following integral:
 $$
-    S\[\alpha\] = \int_0^T \lVert\alpha^\prime(t)\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime(t) \cdot \alpha^\prime(t)} \mathrm dt 
+    \mathcal{S}\[\alpha\] = \int_0^T \lVert\alpha^\prime(t)\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime(t) \cdot \alpha^\prime(t)} \mathrm dt 
 $$
 
 To make things easier, instead of optimizing the distance functional, I used the following energy functional:
 $$
-    E\[\alpha\] = \int_0^T \lVert\alpha^\prime(t)\rVert^2 \mathrm dt = \int_0^T \alpha^\prime(t) \cdot \alpha^\prime(t) \mathrm dt 
+    \mathcal{E}\[\alpha\] = \int_0^T \lVert\alpha^\prime(t)\rVert^2 \mathrm dt = \int_0^T \alpha^\prime(t) \cdot \alpha^\prime(t) \mathrm dt 
 $$
 
 Seemingly, this is just a mathematical trick to reduce the workload of applying the chain rule later, and minimizing the norm is equivalent as minimizing the squared. However, later we will see that this is not as innocent as it seems. Parametrize the curve with surface parameters $u$ and $v$, we have:
@@ -29,7 +29,7 @@ $$
 Now we can proceed to expand the energy functional:
 $$
 \begin{align\*}
-    E\[\alpha\] &= \frac{1}{2}\int_0^T \alpha^\prime(t) \cdot \alpha^\prime(t) \mathrm dt \\\\\[1.5ex]
+    \mathcal{E}\[\alpha\] &= \frac{1}{2}\int_0^T \alpha^\prime(t) \cdot \alpha^\prime(t) \mathrm dt \\\\\[1.5ex]
     &= \frac{1}{2}\int_0^T \frac{\mathrm d}{\mathrm dt}x\big(u(t), v(t)\big) \cdot \frac{\mathrm d}{\mathrm dt}x\big(u(t), v(t)\big) \mathrm dt \\\\\[1.5ex]
     &= \frac{1}{2}\int_0^T x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big) \mathrm dt
 \end{align\*}
@@ -51,25 +51,23 @@ $$
 \end{cases}
 \end{align\*}
 $$
-The shortcut to solve the optimization of $E$ is to use the Euler-Lagrange equation, which gives us the solution when $\alpha$ minimizes $E$:
+The shortcut to solve the optimization of $\mathcal{E}$ is to use the Euler-Lagrange equation, which gives us the solution when $\alpha$ minimizes $\mathcal{E}$. Let $L_{\mathcal{E}}$ be the Lagrangian for the energy functional, $L_{\mathcal{E}}\big(t, u, v, u^\prime, v^\prime\big) = x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big)$, so that $\mathcal{E}\[\alpha\] = \frac{1}{2}\int_0^T L_{\mathcal{E}} \mathrm dt$
 $$
 \begin{align\*}
 \begin{cases}
-  \displaystyle\ \frac{\partial E}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial u^\prime} = 0 \\\\\[3ex]
-  \displaystyle\ \frac{\partial E}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial v^\prime} = 0
+  \displaystyle\ \frac{\partial \mathcal{E}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} = 0 \\\\\[3ex]
+  \displaystyle\ \frac{\partial \mathcal{E}}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial v^\prime} = 0
 \end{cases}
 \end{align\*}
 $$
 
-Calculate each term:
+Since the equations are symmetrical about $u$ and $v$, I'll only calculate the $u$ terms:
 $$
 \begin{align\*}
-    \frac{\partial E}{\partial u} &= \int_0^T x^\prime\cdot x_u^\prime \mathrm dt \\\\\[3ex]
-    \frac{\partial E}{\partial v} &= \int_0^T x^\prime\cdot x_v^\prime \mathrm dt \\\\\[3ex]
-    \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial u^\prime} &= \frac{\mathrm d}{\mathrm dt}\int_0^T x^\prime\cdot \frac{\partial x^\prime}{\partial u^\prime} \mathrm dt \\\\\[1.5ex]
+    \frac{\partial \mathcal{E}}{\partial u} &= \int_0^T x^\prime\cdot x_u^\prime \mathrm dt \\\\\[3ex]
+    \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} &= \frac{\mathrm d}{\mathrm dt}\int_0^T x^\prime\cdot \frac{\partial x^\prime}{\partial u^\prime} \mathrm dt \\\\\[1.5ex]
     &= \int_0^T \Big(x^{\prime\prime}\cdot \frac{\partial x^\prime}{\partial u^\prime} + x^{\prime}\cdot \frac{\mathrm d}{\mathrm dt}\frac{\partial x^\prime}{\partial u^\prime} \Big) \mathrm dt \\\\\[1.5ex]
-    &= \int_0^T \Big(x^{\prime\prime}\cdot x_u + x^{\prime}\cdot x_u^\prime \Big) \mathrm dt \\\\\[3ex]
-    \frac{\mathrm d}{\mathrm dt}\frac{\partial E}{\partial v^\prime} &= \int_0^T \Big(x^{\prime\prime}\cdot x_v + x^{\prime}\cdot x_v^\prime \Big) \mathrm dt
+    &= \int_0^T \Big(x^{\prime\prime}\cdot x_u + x^{\prime}\cdot x_u^\prime \Big) \mathrm dt
 \end{align\*}
 $$
 Combine together:
@@ -91,7 +89,7 @@ $$
 There it is: the definition that the geodesic is straight -- the tangent vector doesn't change along the curve, i.e. $\nabla_{\alpha^\prime}\alpha^\prime = 0$ -- is indeed mathematically equivalent to the notion that geodesics minimize distances on surfaces. To see the math orgies when we don't use the Euler-Lagrange equation, check out the *PS* at the end. The requirement of affine (namely constant speed) parametrization is implied already, because otherwise there will be tangential acceleration and the covariant derivative won't be zero. It comes out naturally as we vary not only the shape of the curve ($u$ and $v$), but also how fast a particle travels along the curve ($u^\prime$ and $v^\prime$). Furthermore, the dependence of the energy functional on speed can be explicitly shown like this: let $s$ be the arclength parameter,
 $$
 \begin{align\*}
-    E\[\alpha\] &= \frac{1}{2}\int_0^T \alpha^\prime \cdot \alpha^\prime \mathrm dt \\\\\[1.5ex]
+    \mathcal{E}\[\alpha\] &= \frac{1}{2}\int_0^T \alpha^\prime \cdot \alpha^\prime \mathrm dt \\\\\[1.5ex]
     &= \frac{1}{2}\int_0^T \Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big) \mathrm dt \\\\\[1.5ex]
     &= \frac{1}{2}\int_0^T s^\prime\Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big) \mathrm ds \\\\\[1.5ex]
 \end{align\*}
@@ -99,7 +97,7 @@ $$
 So when varying the energy functional, the speed $s^\prime$ is also perturbed. Now the question is, what if I used the length functional instead, which is parametrization invariant? Explicitly, 
 $$
 \begin{align\*}
-    S\[\alpha\] &= \int_0^T \lVert\alpha^\prime\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime \cdot \alpha^\prime} \mathrm dt \\\\\[1.5ex]
+    \mathcal{S}\[\alpha\] &= \int_0^T \lVert\alpha^\prime\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime \cdot \alpha^\prime} \mathrm dt \\\\\[1.5ex]
     &= \int_0^T \sqrt{\Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(s^\prime\frac{\mathrm d\alpha}{\mathrm ds}\Big)} \mathrm dt \\\\\[1.5ex]
     &= \int_0^T \sqrt{\Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big) \cdot \Big(\frac{\mathrm d\alpha}{\mathrm ds}\Big)} \mathrm ds \\\\\[1.5ex]
 \end{align\*}
@@ -107,27 +105,60 @@ $$
 which means that the length functional doesn't depend on speed (of course length is not a function of speed, duh)! Will we still recover $\nabla_{\alpha^\prime}\alpha^\prime = 0$ which requires constant speed if we use the length functional? Let's find out:
 $$
 \begin{align\*}
-    S\[\alpha\] &= \int_0^T \lVert\alpha^\prime\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime(t) \cdot \alpha^\prime(t)} \mathrm dt \\\\\[1.5ex]
+    \mathcal{S}\[\alpha\] &= \int_0^T \lVert\alpha^\prime\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime(t) \cdot \alpha^\prime(t)} \mathrm dt \\\\\[1.5ex]
     &= \int_0^T \sqrt{x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big)} \mathrm dt
 \end{align\*}
 $$
 
-Calculate each term in the Euler-Lagrange equation:
+The Euler-Lagrange equation for the length functional is:
+$$
+\begin{align\*}
+\begin{cases}
+  \displaystyle\ \frac{\partial \mathcal{S}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial u^\prime} = 0 \\\\\[3ex]
+  \displaystyle\ \frac{\partial \mathcal{S}}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial v^\prime} = 0
+\end{cases}
+\end{align\*}
+$$
 
+Calculate each term in the Euler-Lagrange equation:
+$$
+\begin{align\*}
+    \frac{\partial \mathcal{S}}{\partial u} &= \frac{1}{2\lVert x^\prime\rVert} \frac{\partial}{\partial u} \int_0^T x^\prime\cdot x^\prime \mathrm dt = \frac{1}{\lVert x^\prime\rVert}\frac{\partial \mathcal{E}}{\partial u} \\\\\[3ex]
+    \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial u^\prime} &= \frac{\mathrm d}{\mathrm dt}\Big(\frac{1}{2\lVert x^\prime\rVert}\frac{\partial}{\partial u^\prime} \int_0^T x^\prime\cdot x^\prime \mathrm dt\Big) =\frac{\mathrm d}{\mathrm dt}\Big( \frac{1}{\lVert x^\prime\rVert}\frac{\partial \mathcal{E}}{\partial u^\prime} \Big) \\\\\[1.5ex]
+    &= \frac{1}{\lVert x^\prime\rVert}\frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} - \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^3}\frac{\partial \mathcal{E}}{\partial u^\prime}
+\end{align\*}
+$$
+
+The Euler-Lagrange equation (showing only the $u$-equation) becomes:
+$$
+\begin{align\*}
+    &\frac{\partial \mathcal{S}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial u^\prime} = 0 \\\\\[3ex]
+    \Rightarrow\ & \frac{1}{\lVert x^\prime\rVert}\frac{\partial \mathcal{E}}{\partial u} - \frac{1}{\lVert x^\prime\rVert}\frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^3}\frac{\partial \mathcal{E}}{\partial u^\prime} = 0  \\\\\[3ex]
+    \Rightarrow\ & \frac{\partial \mathcal{E}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^2}\frac{\partial \mathcal{E}}{\partial u^\prime} = 0
+\end{align\*}
+$$
+
+Curiously, we recover a form that looks like the Euler-Lagrange equation for the energy functional, but with an additional term. Obviously we won't get the vanished covariant like before, and the only way to find out what the additional term entails is to substite the energy functional terms with what we've calculated before:
+$$
+\begin{align\*}
+    \Rightarrow\ &-\int_0^T x^{\prime\prime}\cdot x_u \mathrm dt + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^2}\int_0^T x^\prime\cdot x_u \mathrm dt = 0 \\\\\[3ex]
+    \Rightarrow\ &
+\end{align\*}
+$$
 
 ### P.S. The Promised Math Orgy
 Now if there's a small variation $\delta \alpha$ applied to the curve, the energy functional is perturbed:
 $$
 \begin{align\*}
-    E + \delta E &= \frac{1}{2}\int_0^T (x^\prime+\delta x^\prime) \cdot (x^\prime+\delta x^\prime) \mathrm dt \\\\\[1.5ex]
+    \mathcal{E} + \delta \mathcal{E} &= \frac{1}{2}\int_0^T (x^\prime+\delta x^\prime) \cdot (x^\prime+\delta x^\prime) \mathrm dt \\\\\[1.5ex]
     &= \frac{1}{2}\int_0^T x^\prime\cdot x^\prime \mathrm dt + \int_0^T x^\prime \cdot \delta x^\prime \mathrm dt + O(\delta x^{\prime 2}) \\\\\[1.5ex]
-    &= E + \int_0^T x^\prime \cdot \delta x^\prime \mathrm dt + O(\delta x^{\prime 2})
+    &= \mathcal{E} + \int_0^T x^\prime \cdot \delta x^\prime \mathrm dt + O(\delta x^{\prime 2})
 \end{align\*}
 $$
 
 The higher order term $O(\delta x^{\prime 2})$ is omitted, which leads to:
 $$
-    \delta E = \int_0^T x^\prime \cdot \delta x^\prime \mathrm dt
+    \delta \mathcal{E} = \int_0^T x^\prime \cdot \delta x^\prime \mathrm dt
 $$
 
 $\delta x^\prime$ can be expanded the same way as the total differential, and as mentioned before, it's a function of $u$, $v$, $u^\prime$, and $v^\prime$:
@@ -141,7 +172,7 @@ $$
 Plug this back in the integral for the variation of the energy functional:
 $$
 \begin{align\*}
-    \delta E &= \int_0^T \textcolor{blue}{x^\prime} \cdot \textcolor{red}{\delta x^\prime} \mathrm dt \\\\\[1.5ex]
+    \delta \mathcal{E} &= \int_0^T \textcolor{blue}{x^\prime} \cdot \textcolor{red}{\delta x^\prime} \mathrm dt \\\\\[1.5ex]
     &= \int_0^T \textcolor{blue}{(u^\prime x_u + v^\prime x_v)} \cdot \textcolor{red}{\Big\\{(u^\prime x_{uu} + v^\prime x_{uv}) \delta u + (u^\prime x_{uv} + v^\prime x_{vv}) \delta v + x_u \delta u^\prime + x_v \delta v^\prime\Big\\}} \mathrm dt \\\\\[1.5ex]
     &= \int_0^T \mathrm dt\ \big(u^{\prime 2}x_u\cdot x_{uu} + u^\prime v^\prime x_u \cdot x_{uv} + u^\prime v^\prime x_v\cdot x_{uu} + v^{\prime 2}x_v\cdot x_{uv}\big)\delta u  \\\\\[1.5ex]
     &\ \ \ \ \ \ \ \ \ + \big(u^{\prime 2}x_u\cdot x_{uv} + u^\prime v^\prime x_u \cdot x_{vv} + u^\prime v^\prime x_v\cdot x_{uv} + v^{\prime 2}x_v\cdot x_{vv}\big)\delta v  \\\\\[1.5ex]
@@ -200,7 +231,7 @@ $$
 Now, plug this back into the integral for $\delta E$ and cancel things out, we get:
 $$
 \begin{align\*}
-    \delta E &= -\int_0^T \mathrm dt\ \big(u^{\prime\prime} E + v^{\prime\prime} F + u^{\prime 2}x_u\cdot x_{uu} + 2u^\prime v^\prime x_u\cdot x_{uv} + v^{\prime 2} x_u\cdot x_{vv}\big)\delta u  \\\\\[1.5ex]
+    \delta \mathcal{E} &= -\int_0^T \mathrm dt\ \big(u^{\prime\prime} E + v^{\prime\prime} F + u^{\prime 2}x_u\cdot x_{uu} + 2u^\prime v^\prime x_u\cdot x_{uv} + v^{\prime 2} x_u\cdot x_{vv}\big)\delta u  \\\\\[1.5ex]
     &\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \big(u^{\prime\prime} F + v^{\prime\prime} G + u^{\prime 2}x_v\cdot x_{uu} + 2u^\prime v^\prime x_v \cdot x_{uv} + v^{\prime 2}x_v\cdot x_{vv}\big)\delta v  \\\\\[1.5ex]
     &= -\int_0^T \mathrm dt\ (u^{\prime\prime} x_u + v^{\prime\prime} x_v + u^{\prime 2}x_{uu} + 2u^\prime v^\prime x_{uv} + v^{\prime 2} x_{vv}) \cdot x_u \ \delta u  \\\\\[1.5ex]
     &\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + (u^{\prime\prime} x_u + v^{\prime\prime} x_v + u^{\prime 2}x_{uu} + 2u^\prime v^\prime x_{uv} + v^{\prime 2}x_{vv})\cdot x_v\ \delta v  \\\\\[1.5ex]
@@ -220,10 +251,10 @@ $$
 
 So,
 $$
-    \delta E = -\int_0^T\ (x^{\prime\prime}\cdot x_u\delta u +  x^{\prime\prime}\cdot x_v\delta v)\ \mathrm dt
+    \delta \mathcal{E} = -\int_0^T\ (x^{\prime\prime}\cdot x_u\delta u +  x^{\prime\prime}\cdot x_v\delta v)\ \mathrm dt
 $$
 
-As in any optimization problem, the minimum of $E$ is found when the variation $\delta E=0$. This leads to the following equations:
+As in any optimization problem, the minimum of $\mathcal{E}$ is found when the variation $\delta \mathcal{E}=0$. This leads to the following equations:
 $$
 \begin{cases}
   \ x^{\prime\prime}\cdot x_u = 0 \\\\
