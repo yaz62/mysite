@@ -51,12 +51,20 @@ $$
 \end{cases}
 \end{align\*}
 $$
-The shortcut to solve the optimization of $\mathcal{E}$ is to use the Euler-Lagrange equation, which gives us the solution when $\alpha$ minimizes $\mathcal{E}$. Let $L_{\mathcal{E}}$ be the Lagrangian for the energy functional, $L_{\mathcal{E}}\big(t, u, v, u^\prime, v^\prime\big) = x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big)$, so that $\mathcal{E}\[\alpha\] = \frac{1}{2}\int_0^T L_{\mathcal{E}} \mathrm dt$
+The shortcut to solve the optimization of $\mathcal{E}$ is to use the Euler-Lagrange equation. Let $L_{\mathcal{E}}$ be the Lagrangian for the energy functional:
+$$
+    L_{\mathcal{E}}\big(t, u, v, u^\prime, v^\prime\big) = \frac{1}{2} x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big)
+$$
+so that, 
+$$
+    \mathcal{E}\[\alpha\] = \int_0^T L_{\mathcal{E}} \mathrm dt
+$$
+Then the Euler-Lagrange equation that gives us the solution when $\alpha$ minimizes $\mathcal{E}$ is:
 $$
 \begin{align\*}
 \begin{cases}
-  \displaystyle\ \frac{\partial \mathcal{E}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} = 0 \\\\\[3ex]
-  \displaystyle\ \frac{\partial \mathcal{E}}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial v^\prime} = 0
+  \displaystyle\ \frac{\partial L_\mathcal{E}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial L_\mathcal{E}}{\partial u^\prime} = 0 \\\\\[3ex]
+  \displaystyle\ \frac{\partial L_\mathcal{E}}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial L_\mathcal{E}}{\partial v^\prime} = 0
 \end{cases}
 \end{align\*}
 $$
@@ -64,29 +72,25 @@ $$
 Since the equations are symmetrical about $u$ and $v$, I'll only calculate the $u$ terms:
 $$
 \begin{align\*}
-    \frac{\partial \mathcal{E}}{\partial u} &= \int_0^T x^\prime\cdot x_u^\prime \mathrm dt \\\\\[3ex]
-    \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} &= \frac{\mathrm d}{\mathrm dt}\int_0^T x^\prime\cdot \frac{\partial x^\prime}{\partial u^\prime} \mathrm dt \\\\\[1.5ex]
-    &= \int_0^T \Big(x^{\prime\prime}\cdot \frac{\partial x^\prime}{\partial u^\prime} + x^{\prime}\cdot \frac{\mathrm d}{\mathrm dt}\frac{\partial x^\prime}{\partial u^\prime} \Big) \mathrm dt \\\\\[1.5ex]
-    &= \int_0^T \Big(x^{\prime\prime}\cdot x_u + x^{\prime}\cdot x_u^\prime \Big) \mathrm dt
+    \frac{\partial L_\mathcal{E}}{\partial u} &= \frac{1}{2} \frac{\partial}{\partial u}\big(x^\prime \cdot x^\prime\big) = x^\prime\cdot x_u^\prime \\\\\[3ex]
+    \frac{\mathrm d}{\mathrm dt}\frac{\partial L_\mathcal{E}}{\partial u^\prime} &= \frac{1}{2}\frac{\mathrm d}{\mathrm dt}\frac{\partial}{\partial u^\prime} \big(x^\prime\cdot x^\prime\big) \\\\\[1.5ex]
+    &= \frac{\mathrm d}{\mathrm dt} \big(x^\prime\cdot \frac{\partial x^\prime}{\partial u^\prime}\big) \\\\\[1.5ex]
+    &= x^{\prime\prime}\cdot \frac{\partial x^\prime}{\partial u^\prime} + x^{\prime}\cdot \frac{\mathrm d}{\mathrm dt}\frac{\partial x^\prime}{\partial u^\prime} \\\\\[1.5ex]
+    &= x^{\prime\prime}\cdot x_u + x^{\prime}\cdot x_u^\prime
 \end{align\*}
 $$
 Combine together:
 $$
 \begin{align\*}
 &\begin{cases}
-  \displaystyle\ \int_0^T \Big(\textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_u^\prime}}} - x^{\prime\prime}\cdot x_u - \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_u^\prime}}}\Big) \mathrm dt = 0 \\\\\[3ex]
-  \displaystyle\ \int_0^T \Big(\textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_v^\prime}}} - x^{\prime\prime}\cdot x_v - \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_v^\prime}}}\Big) \mathrm dt = 0\\\\\[3ex]
+  \displaystyle\ \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_u^\prime}}} - x^{\prime\prime}\cdot x_u - \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_u^\prime}}} = 0 \\\\\[3ex]
+  \displaystyle\ \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_v^\prime}}} - x^{\prime\prime}\cdot x_v - \textcolor{red}{\cancel{\textcolor{black}{x^\prime \cdot x_v^\prime}}} = 0
 \end{cases} \\\\\[3ex]
-\Rightarrow &
-\begin{cases}
-  x^{\prime\prime}\cdot x_u = 0 \\\\\[1.5ex]
-  x^{\prime\prime}\cdot x_v = 0
-\end{cases}  \\\\\[3ex]
 \Rightarrow &\Big(D_{\alpha^\prime}\alpha^\prime\Big)^\parallel = 0 \\\\\[1.5ex]
 \Rightarrow &\nabla_{\alpha^\prime}\alpha^\prime = 0
 \end{align\*}
 $$
-There it is: the definition that the geodesic is straight -- the tangent vector doesn't change along the curve, i.e. $\nabla_{\alpha^\prime}\alpha^\prime = 0$ -- is indeed mathematically equivalent to the notion that geodesics minimize distances on surfaces. To see the math orgies when we don't use the Euler-Lagrange equation, check out the *PS* at the end. The requirement of affine (namely constant speed) parametrization is implied already, because otherwise there will be tangential acceleration and the covariant derivative won't be zero. It comes out naturally as we vary not only the shape of the curve ($u$ and $v$), but also how fast a particle travels along the curve ($u^\prime$ and $v^\prime$). Furthermore, the dependence of the energy functional on speed can be explicitly shown like this: let $s$ be the arclength parameter,
+There it is: the definition that the geodesic is straight -- the tangent vector doesn't change along the curve, i.e. $\nabla_{\alpha^\prime}\alpha^\prime = 0$ -- is indeed mathematically equivalent to the notion that geodesics minimize distances on surfaces. To see the math orgies when we don't use the Euler-Lagrange equation, check out the *PS* at the end. The requirement of affine (namely constant speed) parametrization is implied already, because otherwise there will be tangential acceleration and the covariant derivative won't be zero. It comes out naturally as we vary not only the shape of the curve ($u$ and $v$, and the direction of $\[u^\prime, v^\prime\]$), but also how fast a particle travels along the curve (magnitude of $\[u^\prime, v^\prime\]$). Furthermore, the dependence of the energy functional on speed can be explicitly shown like this: let $s$ be the arclength parameter,
 $$
 \begin{align\*}
     \mathcal{E}\[\alpha\] &= \frac{1}{2}\int_0^T \alpha^\prime \cdot \alpha^\prime \mathrm dt \\\\\[1.5ex]
@@ -106,7 +110,8 @@ which means that the length functional doesn't depend on speed (of course length
 $$
 \begin{align\*}
     \mathcal{S}\[\alpha\] &= \int_0^T \lVert\alpha^\prime\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime(t) \cdot \alpha^\prime(t)} \mathrm dt \\\\\[1.5ex]
-    &= \int_0^T \sqrt{x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big)} \mathrm dt
+    &= \int_0^T \sqrt{x^\prime\big(u, v, u^\prime, v^\prime\big) \cdot x^\prime\big(u, v, u^\prime, v^\prime\big)} \mathrm dt \\\\\[1.5ex]
+    &= \int_0^T L_{\mathcal S}\ \mathrm dt
 \end{align\*}
 $$
 
@@ -114,8 +119,8 @@ The Euler-Lagrange equation for the length functional is:
 $$
 \begin{align\*}
 \begin{cases}
-  \displaystyle\ \frac{\partial \mathcal{S}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial u^\prime} = 0 \\\\\[3ex]
-  \displaystyle\ \frac{\partial \mathcal{S}}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial v^\prime} = 0
+  \displaystyle\ \frac{\partial L_{\mathcal S}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial L_{\mathcal S}}{\partial u^\prime} = 0 \\\\\[3ex]
+  \displaystyle\ \frac{\partial L_{\mathcal S}}{\partial v} - \frac{\mathrm d}{\mathrm dt}\frac{\partial L_{\mathcal S}}{\partial v^\prime} = 0
 \end{cases}
 \end{align\*}
 $$
@@ -123,27 +128,35 @@ $$
 Calculate each term in the Euler-Lagrange equation:
 $$
 \begin{align\*}
-    \frac{\partial \mathcal{S}}{\partial u} &= \frac{1}{2\lVert x^\prime\rVert} \frac{\partial}{\partial u} \int_0^T x^\prime\cdot x^\prime \mathrm dt = \frac{1}{\lVert x^\prime\rVert}\frac{\partial \mathcal{E}}{\partial u} \\\\\[3ex]
-    \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial u^\prime} &= \frac{\mathrm d}{\mathrm dt}\Big(\frac{1}{2\lVert x^\prime\rVert}\frac{\partial}{\partial u^\prime} \int_0^T x^\prime\cdot x^\prime \mathrm dt\Big) =\frac{\mathrm d}{\mathrm dt}\Big( \frac{1}{\lVert x^\prime\rVert}\frac{\partial \mathcal{E}}{\partial u^\prime} \Big) \\\\\[1.5ex]
-    &= \frac{1}{\lVert x^\prime\rVert}\frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} - \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^3}\frac{\partial \mathcal{E}}{\partial u^\prime}
+    \frac{\partial L_{\mathcal S}}{\partial u} &= \frac{1}{2\lVert x^\prime\rVert} \frac{\partial}{\partial u} \big(x^\prime\cdot x^\prime\big) = \frac{1}{\lVert x^\prime\rVert}\frac{\partial L_{\mathcal E}}{\partial u} \\\\\[3ex]
+    \frac{\mathrm d}{\mathrm dt}\frac{\partial L_{\mathcal S}}{\partial u^\prime} &= \frac{\mathrm d}{\mathrm dt}\Big(\frac{1}{2\lVert x^\prime\rVert}\frac{\partial}{\partial u^\prime} \big( x^\prime\cdot x^\prime \big)\Big) =\frac{\mathrm d}{\mathrm dt}\Big( \frac{1}{\lVert x^\prime\rVert}\frac{\partial L_{\mathcal E}}{\partial u^\prime} \Big) \\\\\[1.5ex]
+    &= \frac{1}{\lVert x^\prime\rVert}\frac{\mathrm d}{\mathrm dt}\frac{\partial L_{\mathcal E}}{\partial u^\prime} - \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^3}\frac{\partial L_{\mathcal E}}{\partial u^\prime}
 \end{align\*}
 $$
 
 The Euler-Lagrange equation (showing only the $u$-equation) becomes:
 $$
 \begin{align\*}
-    &\frac{\partial \mathcal{S}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{S}}{\partial u^\prime} = 0 \\\\\[3ex]
-    \Rightarrow\ & \frac{1}{\lVert x^\prime\rVert}\frac{\partial \mathcal{E}}{\partial u} - \frac{1}{\lVert x^\prime\rVert}\frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^3}\frac{\partial \mathcal{E}}{\partial u^\prime} = 0  \\\\\[3ex]
-    \Rightarrow\ & \frac{\partial \mathcal{E}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial \mathcal{E}}{\partial u^\prime} + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^2}\frac{\partial \mathcal{E}}{\partial u^\prime} = 0
+    &\frac{\partial L_{\mathcal S}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial L_{\mathcal S}}{\partial u^\prime} = 0 \\\\\[3ex]
+    \Rightarrow\ & \frac{1}{\lVert x^\prime\rVert}\frac{\partial L_{\mathcal E}}{\partial u} - \frac{1}{\lVert x^\prime\rVert}\frac{\mathrm d}{\mathrm dt}\frac{\partial L_{\mathcal E}}{\partial u^\prime} + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^3}\frac{\partial L_{\mathcal E}}{\partial u^\prime} = 0  \\\\\[3ex]
+    \Rightarrow\ & \frac{\partial L_{\mathcal E}}{\partial u} - \frac{\mathrm d}{\mathrm dt}\frac{\partial L_{\mathcal E}}{\partial u^\prime} + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^2}\frac{\partial L_{\mathcal E}}{\partial u^\prime} = 0
 \end{align\*}
 $$
 
 Curiously, we recover a form that looks like the Euler-Lagrange equation for the energy functional, but with an additional term. Obviously we won't get the vanished covariant like before, and the only way to find out what the additional term entails is to substite the energy functional terms with what we've calculated before:
 $$
 \begin{align\*}
-    \Rightarrow\ &-\int_0^T x^{\prime\prime}\cdot x_u \mathrm dt + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^2}\int_0^T x^\prime\cdot x_u \mathrm dt = 0 \\\\\[3ex]
-    \Rightarrow\ &
+    \Rightarrow\ &-x^{\prime\prime}\cdot x_u + \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^2}\big(x^\prime\cdot x_u \big) = 0 \\\\\[3ex]
+    \Rightarrow\ & x^{\prime\prime}\cdot x_u = \frac{x^\prime \cdot x^{\prime\prime}}{\lVert x^\prime\rVert^2}\big(x^\prime\cdot x_u \big)
 \end{align\*}
+$$
+Take together the result for the $v$-equation, and switch back to $\alpha$, we get:
+$$
+\nabla_{\alpha^\prime}\alpha^\prime = \frac{\alpha^\prime \cdot \alpha^{\prime\prime}}{\lVert \alpha^\prime\rVert^2}\big(\alpha^{\prime}\big)^\parallel
+$$
+Note that by definition $\alpha^\prime$ lives in the tangent space, so $\big(\alpha^{\prime}\big)^\parallel = \alpha^{\prime}$. To make things a bit clearer, I'll also denote the factor on the right hand side before the tangent vector as $f(t)$. Then:
+$$
+\nabla_{\alpha^\prime}\alpha^\prime = f(t)\alpha^{\prime}
 $$
 
 ### P.S. The Promised Math Orgy
