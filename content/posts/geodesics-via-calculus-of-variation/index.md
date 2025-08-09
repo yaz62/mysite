@@ -5,23 +5,40 @@ draft = false
 tags = ["differential geometry", "geodesic", "calculus of variation", "euler-lagrange equation"]
 +++
 
-When I explain geodesics to people, I usually use two intuitions:
-- Geodesics are the "straight lines" on curved surfaces, and;
+**TL;DR:**
+
+- This post shows how the calculus of variations connects two definitions of geodesics: as “straight lines” (parallel transport) and as distance-minimizing curves.
+- By applying the Euler-Lagrange equation to both the energy and length functionals, we see that minimizing energy requires constant-speed (affine) parametrization, while minimizing length is parametrization-invariant.
+- The result: a curve is a geodesic if its covariant acceleration is parallel to its tangent vector, generalizing the definition beyond constant-speed parametrization.
+
+
+I usually explain geodesics to others based on two intuitions:
+- Geodesics are the "straight lines" on curved surfaces;
 - Geodesics minimize distances between two points on curved surfaces.
 
-The **definition** I used in [this post](https://yaz62.github.io/posts/prove-meridians-are-geodesics/) is basically a more precise version of the first intuition, using the tool of parallel transport to define what is considered "straight" on a curved surface. However, for people who study Lagrangian mechanics, a definition based on the second intuition might be more straightforward, as the geodesic is the path that minimizes the action, if we define the action as the Euclidean distance between points.
 
-Consider two points $P$ and $Q$ on a curved space $x$, connected by a curve $\alpha$. A particle moves from $P$ to $Q$ at speed $\lVert\alpha^\prime\rVert$, taking time $T$. The distance functional is defined as the following integral:
+The **definition** I used in [this post](https://yaz62.github.io/posts/prove-meridians-are-geodesics/) is basically a more precise version of the first intuition, using the tool of parallel transport to define what is considered "straight" on a curved surface. However, for people who study Lagrangian mechanics, a definition based on the second intuition might be more straightforward, as the geodesic is the path that minimizes the action, if we define the action as the distance on the curved surface between points. In this post, my goal is to bridge these two ideas about geodesics, by showing that a curve that minimizes the distance between two points is indeed straight on a curved surface.
+
+In this blog post, I'll use calculus of variations as the tool to find the distance-minimizing curve. The idea is simple: consider two fixed points $P$ and $Q$ on a curved space $x$, connected by a curve $\alpha$. A particle moves from $P$ to $Q$ at speed $\lVert\alpha^\prime\rVert$, taking time $T$. The goal is to find the optimal curve $\alpha^\*$ that minimizes the distance functional, which is defined by the following integral:
 $$
     \mathcal{S}\[\alpha\] = \int_0^T \lVert\alpha^\prime(t)\rVert \mathrm dt = \int_0^T \sqrt{\alpha^\prime(t) \cdot \alpha^\prime(t)} \mathrm dt 
 $$
+Then, if we introduce small variations $\delta \alpha$ to the curve, the distance function will also be perturbed: $\mathcal{S}\[\alpha + \delta \alpha\] = \mathcal{S} + \delta \mathcal{S}$. Here's a diagram of how calculus of variation work:
 
-To make things easier, instead of optimizing the distance functional, I used the following energy functional:
+<figure>
+  <img src="diagram_calculus_of_variation.png" alt="Diagram" width="500">
+</figure>
+
+As shown in this diagram, you can think of the introduced variations as moving all points of $\alpha^*$ across a small distance $\delta \alpha$. As a result, the distance functional increases as you move the points further and further away (the curves are colored to indicate the distances) from $\alpha^\*$. Just like in regular calculus, the optimum is found when $\delta \mathcal{S}=0$. 
+
+However, to make the post concise, I'll use the Euler-Lagrange equation as a shortcut to solve for the optimum. If you are interested to see the math orgies when we don't use the Euler-Lagrange equation, check out the *PS* at the end.
+
+To make things easier, instead of optimizing the distance functional, I'll use the following energy functional:
 $$
     \mathcal{E}\[\alpha\] = \int_0^T \lVert\alpha^\prime(t)\rVert^2 \mathrm dt = \int_0^T \alpha^\prime(t) \cdot \alpha^\prime(t) \mathrm dt 
 $$
 
-Seemingly, this is just a mathematical trick to reduce the workload of applying the chain rule later, and minimizing the norm is equivalent as minimizing the squared. However, later we will see that this is not as innocent as it seems. Parametrize the curve with surface parameters $u$ and $v$, we have:
+At first glance, this seems like a mathematical trick to reduce the workload of applying the chain rule later, since minimizing the norm is equivalent to minimizing the squared norm. However, as we will see later, this is not as innocent as it seems.
 $$
     \alpha(t) = x\big(u(t), v(t)\big)
 $$
@@ -35,7 +52,7 @@ $$
 \end{align\*}
 $$
 
-It is essential to realize that $x^\prime$ is function of not only $u$ and $v$, but also $u^\prime$ and $v^\prime$. Explicitly:
+It is essential to realize that $x^\prime$ is function not only of $u$ and $v$, but also of $u^\prime$ and $v^\prime$. Explicitly:
 $$
     x^\prime(u, v, u^\prime, v^\prime) = \frac{\mathrm d}{\mathrm dt}x(u, v) = u^\prime x_u + v^\prime x_v
 $$
@@ -90,7 +107,7 @@ $$
 \Rightarrow &\nabla_{\alpha^\prime}\alpha^\prime = 0
 \end{align\*}
 $$
-There it is: the definition that the geodesic is straight -- the tangent vector doesn't change along the curve, i.e. $\nabla_{\alpha^\prime}\alpha^\prime = 0$ -- is indeed mathematically equivalent to the notion that geodesics minimize distances on surfaces. To see the math orgies when we don't use the Euler-Lagrange equation, check out the *PS* at the end. The requirement of affine (namely constant speed) parametrization is implied already, because otherwise there will be tangential acceleration and the covariant derivative won't be zero. It comes out naturally as we vary not only the shape of the curve ($u$ and $v$, and the direction of $\[u^\prime, v^\prime\]$), but also how fast a particle travels along the curve (magnitude of $\[u^\prime, v^\prime\]$). Furthermore, the dependence of the energy functional on speed can be explicitly shown like this: let $s$ be the arclength parameter,
+There it is: the definition that the geodesic is straight -- the tangent vector doesn't change along the curve, i.e. $\nabla_{\alpha^\prime}\alpha^\prime = 0$ -- is indeed mathematically equivalent to the notion that geodesics minimize distances (actually, energy) on surfaces. The requirement of affine (namely constant speed) parametrization is implied already, because otherwise there will be tangential acceleration and the covariant derivative won't be zero. It comes out naturally as we vary not only the shape of the curve ($u$ and $v$, and the direction of $\[u^\prime, v^\prime\]$), but also how fast a particle travels along the curve (magnitude of $\[u^\prime, v^\prime\]$). Furthermore, the dependence of the energy functional on speed can be explicitly shown like this: let $s$ be the arclength parameter,
 $$
 \begin{align\*}
     \mathcal{E}\[\alpha\] &= \frac{1}{2}\int_0^T \alpha^\prime \cdot \alpha^\prime \mathrm dt \\\\\[1.5ex]
@@ -159,8 +176,22 @@ $$
 \nabla_{\alpha^\prime}\alpha^\prime = f(t)\alpha^{\prime}
 $$
 
+Now the picture is clear: the path that minimizes the length functional is the one where its covariant derivative (covariant acceleration or intrinsic acceleration?) is parallel to its tangent. This in my view is a generalized, parametrization-invariant definition of the geodesics: 
+
+> **Generalized Definition** We say a parametrized curve $\alpha$ in a surface $M$ is a geodesic if when a particle travels along it, the particle's covariant acceleration is parallel to its tangent vector, i.e., if $\nabla_{\alpha^\prime}\alpha^\prime=f(t)\alpha^{\prime}$.
+
+Based on this definition, $\alpha$ does not need to be affine-parametrized. The particle is allowed to pick up some acceleration while traveling down the geodesic, but the projection of the acceleration on the tangent space must not turn the direction of the tangent vector. This definition holds irrespective of how the particle moves along the curve, as long as the shape of the curve is unchanged. In the Darboux frame shown below, if the red curve is a geodesic, the green arrow should have zero length. The covariant acceleration can have the orange component based on the **Generalized Definition**, whereas in the original **Definition**, neither components is allowed.
+
+<figure>
+  <img src="diagram.png" alt="Diagram" width="500">
+</figure>
+
 ### P.S. The Promised Math Orgy
-Now if there's a small variation $\delta \alpha$ applied to the curve, the energy functional is perturbed:
+The energy functional is:
+$$
+    \mathcal{E}\[\alpha\] = \int_0^T \lVert\alpha^\prime(t)\rVert^2 \mathrm dt = \int_0^T \alpha^\prime(t) \cdot \alpha^\prime(t) \mathrm dt 
+$$
+If there's a small variation $\delta \alpha$ applied to the curve, the energy functional is perturbed:
 $$
 \begin{align\*}
     \mathcal{E} + \delta \mathcal{E} &= \frac{1}{2}\int_0^T (x^\prime+\delta x^\prime) \cdot (x^\prime+\delta x^\prime) \mathrm dt \\\\\[1.5ex]

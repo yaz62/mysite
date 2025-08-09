@@ -10,6 +10,19 @@ info = "Bits of Science, Math, and Code, In That Order"
 description = "Personal blogs on science, math, and coding"
 avatarURL = ""  # You can set a URL later
 math = true
+customCSS = ["css/custom.css"]
+
+[[params.social]]
+  name = "Google Scholar"
+  icon = "ai ai-google-scholar ai-2x"
+  url  = "https://scholar.google.com/citations?user=VxwU0pgAAAAJ&hl=en"
+  weight = 1
+
+[[params.social]]
+  name  = "LinkedIn"
+  icon  = "fab fa-linkedin fa-2x"  # fa-3x for bigger
+  url   = "https://www.linkedin.com/in/yan-zhang-1000269a/"
+  weight = 2
 
 [markup]
   [markup.goldmark]
